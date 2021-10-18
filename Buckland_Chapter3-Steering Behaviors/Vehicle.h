@@ -28,6 +28,7 @@ class Vehicle : public MovingEntity
 
 private:
 
+    
   //a pointer to the world data. So a vehicle can access any obstacle,
   //path, wall or agent data
   GameWorld*            m_pWorld;
@@ -51,6 +52,8 @@ private:
   //keeps a track of the most recent update time. (some of the
   //steering behaviors make use of this - see Wander)
   double                m_dTimeElapsed;
+
+  bool                  m_bHumanControl = false;
 
 
   //buffer for the vehicle shape
@@ -95,6 +98,8 @@ public:
   void        SmoothingOn(){m_bSmoothingOn = true;}
   void        SmoothingOff(){m_bSmoothingOn = false;}
   void        ToggleSmoothing(){m_bSmoothingOn = !m_bSmoothingOn;}
+  bool        HumanControlled() { return m_bHumanControl; }
+  void        SetHumanControl() { m_bHumanControl = !m_bHumanControl; }
   
   double       TimeElapsed()const{return m_dTimeElapsed;}
  
