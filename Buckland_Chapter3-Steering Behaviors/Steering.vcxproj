@@ -66,6 +66,7 @@
       <PrecompiledHeaderOutputFile>.\Release\Steering.pch</PrecompiledHeaderOutputFile>
       <ObjectFileName>.\Release\</ObjectFileName>
       <ProgramDataBaseFileName>.\Release\</ProgramDataBaseFileName>
+      <AdditionalIncludeDirectories>D:\Marc-Alexandre\Université\Cinquième trimestre\Intelligence artificielle\steer-une-balle\Common;</AdditionalIncludeDirectories>
     </ClCompile>
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -107,7 +108,7 @@
       <ObjectFileName>.\Debug\</ObjectFileName>
       <ProgramDataBaseFileName>.\Debug\</ProgramDataBaseFileName>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <AdditionalIncludeDirectories>C:\Léonard\Atelier 1\code_source_devoir_2\Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Marc-Alexandre\Université\Cinquième trimestre\Intelligence artificielle\steer-une-balle\Common;C:\Léonard\Atelier 1\code_source_devoir_2\Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -138,6 +139,7 @@
     <ClCompile Include="..\Common\misc\iniFileLoaderBase.cpp" />
     <ClCompile Include="..\Common\misc\WindowUtils.cpp" />
     <ClCompile Include="..\Common\Time\PrecisionTimer.cpp" />
+    <ClCompile Include="AgentPoursuiveur.cpp" />
     <ClCompile Include="GameWorld.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Obstacle.cpp" />
@@ -161,6 +163,7 @@
     <ClInclude Include="..\Common\misc\utils.h" />
     <ClInclude Include="..\Common\misc\WindowUtils.h" />
     <ClInclude Include="..\Common\Time\PrecisionTimer.h" />
+    <ClInclude Include="AgentPoursuiveur.h" />
     <ClInclude Include="BaseGameEntity.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="EntityFunctionTemplates.h" />
