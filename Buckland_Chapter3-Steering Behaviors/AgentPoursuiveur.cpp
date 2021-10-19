@@ -17,7 +17,7 @@ AgentPoursuiveur::AgentPoursuiveur(GameWorld* world,
 	int id,
 	int count): Vehicle(world, position, rotation, velocity, mass, max_force, max_speed, max_turn_rate, scale) 
 {
-	m_pSteering->offset_pursuitOn();//Must also use flocking to get distance between poursuiveur
+	m_pSteering->OffsetPursuitOn(leader, offset);//Must also use flocking to get distance between poursuiveur
 	m_pSteering->WallAvoidanceOn();
 	SetScale(Vector2D(10, 10));
 }
@@ -48,5 +48,4 @@ void AgentPoursuiveur::Update(double time_elapsed)
 	{
 		m_Vehicles[a]->Update(time_elapsed);
 	}*/
-	Vehicle::Update(time_elapsed);
 }
