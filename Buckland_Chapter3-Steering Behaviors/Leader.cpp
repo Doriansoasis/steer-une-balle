@@ -29,7 +29,7 @@ void Leader::Update(double time_elapsed)
 			Steering()->WanderOff();
 		}
 
-		if (!HumanControlled())
+		else
 		{
 			Steering()->WanderOn();
 		}
@@ -41,19 +41,19 @@ void Leader::Update(double time_elapsed)
 
 		if (GetKeyState('W') < 0)
 		{
-			m_vVelocity += Vector2D(0.0f, -30.0f);
+			m_vVelocity += Vector2D(0.0f, -vitesse_humain);
 		}
 		if (GetKeyState('S') < 0)
 		{
-			m_vVelocity += Vector2D(0.0f, 30.0f);
+			m_vVelocity += Vector2D(0.0f, vitesse_humain);
 		}
 		if (GetKeyState('A') < 0)
 		{
-			m_vVelocity += Vector2D(-30.0f, 0.0f);
+			m_vVelocity += Vector2D(-vitesse_humain, 0.0f);
 		}
 		if (GetKeyState('D') < 0)
 		{
-			m_vVelocity += Vector2D(30.0f, 0.0f);
+			m_vVelocity += Vector2D(vitesse_humain, 0.0f);
 		}
 
 	}

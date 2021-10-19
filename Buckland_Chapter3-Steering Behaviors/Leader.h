@@ -11,6 +11,7 @@ protected:
 
 	Vector2D GetVehiculeAcceleration();
 	bool m_bHumanControlChange = false;
+	double      vitesse_humain = 50.0f;
 
 public:
 	Leader(GameWorld* world,
