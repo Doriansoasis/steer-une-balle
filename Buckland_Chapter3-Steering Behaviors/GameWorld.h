@@ -125,7 +125,7 @@ public:
   int   cxClient()const{return m_cxClient;}
   int   cyClient()const{return m_cyClient;}
  
-  bool  RenderWalls()const{return m_bShowWalls;}
+  bool  RenderWalls()const{return m_bShowWalls;} //point break
   bool  RenderObstacles()const{return m_bShowObstacles;}
   bool  RenderPath()const{return m_bShowPath;}
   bool  RenderDetectionBox()const{return m_bShowDetectionBox;}
