@@ -20,6 +20,7 @@ protected:
 	Vehicle* m_vLeader;
 	Vehicle* m_vTarget;
 	int m_iNbreAgent;
+	int m_id;
 public:
 	AgentPoursuiveur(GameWorld* world,
 		Vector2D position,
@@ -35,7 +36,7 @@ public:
 		Vector2D offset,
 		int id,
 		int count);
-	~AgentPoursuiveur();
+	//~AgentPoursuiveur();
 	//updates the vehicle's position and orientation
 	void Update(double time_elapsed);
 };

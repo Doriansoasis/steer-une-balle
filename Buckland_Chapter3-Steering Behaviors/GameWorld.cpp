@@ -48,11 +48,7 @@ GameWorld::GameWorld(int cx, int cy):
   m_pPath = new Path(5, border, border, cx-border, cy-border, true); 
 
 
-  //setup the agents leader
-
-  //setup the agents poursuiveurs
-  //setup the agents
-
+  //setup the leader agent
   Vector2D SpawnPos = Vector2D(cx / 2.0 + RandomClamped() * cx / 2.0,
       cy / 2.0 + RandomClamped() * cy / 2.0);
 
@@ -69,7 +65,7 @@ GameWorld::GameWorld(int cx, int cy):
   m_Vehicles.push_back(pLeader);
   m_pCellSpace->AddEntity(pLeader);
 
-
+  //Setup the followers agents
   for (int a=0; a<Prm.NumAgents; ++a)
   {
 
@@ -128,12 +124,12 @@ GameWorld::GameWorld(int cx, int cy):
 //------------------------------------------------------------------------
 GameWorld::~GameWorld()
 {
-  for (unsigned int a=0; a<m_Vehicles.size(); ++a)
+  for (int a=0; a<m_Vehicles.size(); ++a)
   {
     delete m_Vehicles[a];
   }
 
-  for (unsigned int ob=0; ob<m_Obstacles.size(); ++ob)
+  for (int ob=0; ob<m_Obstacles.size(); ++ob)
   {
     delete m_Obstacles[ob];
   }
@@ -158,7 +154,7 @@ void GameWorld::Update(double time_elapsed)
   
 
   //update the vehicles
-  for (unsigned int a=0; a<m_Vehicles.size(); ++a)
+  for (unsigned int a=0; a < m_Vehicles.size(); a++)
   {
     m_Vehicles[a]->Update(time_elapsed);
   }
