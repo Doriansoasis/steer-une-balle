@@ -26,6 +26,7 @@ AgentPoursuiveur::AgentPoursuiveur(GameWorld* world,
 	m_vOffset = offset;
 	m_iNbreAgent = count;
 	m_id = id;
+
 }
 
 void AgentPoursuiveur::Update(double time_elapsed)
@@ -35,18 +36,14 @@ void AgentPoursuiveur::Update(double time_elapsed)
 		m_bHumanControlChange = HumanControlled();
 		if (HumanControlled())
 		{
-			double radius = 50.0f;
+			double radius = 70.0f;
 			double calculatedAngle = (TwoPi/ m_iNbreAgent)* m_id;
 			double xOffset = radius * cos(calculatedAngle);
 			double yOffset = radius * sin(calculatedAngle);
-			SetScale(Vector2D(1+m_id, 1+m_id));
 			Steering()->OffsetPursuitOn(m_vLeader, Vector2D(xOffset, yOffset));
-			
 		}
-
 		else
 		{
-
 			Steering()->OffsetPursuitOn(m_vTarget, m_vOffset);
 		}
 	}

@@ -334,7 +334,7 @@ void GameWorld::HandleKeyPresses(WPARAM wParam)
 
     case 'C':
     {
-        for (int i = 0; i < Prm.NumAgents; ++i)
+        for (int i = 0; i < Prm.NumAgents + 1; ++i)
         {
             m_Vehicles[i]->SetHumanControl();
         }
