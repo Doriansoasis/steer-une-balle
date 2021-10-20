@@ -17,29 +17,35 @@ AgentPoursuiveur::AgentPoursuiveur(GameWorld* world,
 	int id,
 	int count): Vehicle(world, position, rotation, velocity, mass, max_force, max_speed, max_turn_rate, scale) 
 {
+	Steering()->OffsetPursuitOn(target, offset);//Must also use flocking to get distance between poursuiveur
+	Steering()->WallAvoidanceOn();
+	Steering()->ObstacleAvoidanceOn();
+	SetScale(Vector2D(2*scale, 2*scale));
 	m_vLeader = leader;
 	m_vTarget = target;
 	m_vOffset = offset;
 	m_iNbreAgent = count;
-	m_id = id; 
-	
-	Steering()->OffsetPursuitOn(m_vTarget, m_vOffset);//Must also use flocking to get distance between poursuiveur and change algorithm
-	Steering()->WallAvoidanceOn();
-	//SetScale(Vector2D(5, 5));
+	m_id = id;
 }
 
-// --------------------------------dtor-----------------------------------
-//------------------------------------------------------------------------
-AgentPoursuiveur::~AgentPoursuiveur()
-{
-	//delete m_pSteering;//Must find what needs to be deleted
-	//delete m_pHeadingSmoother;
-}
-
-//----------------------------- Update -----------------------------------
-//------------------------------------------------------------------------
 void AgentPoursuiveur::Update(double time_elapsed)
 {
-	//m_pSteering->OffsetPursuitOn(m_vTarget, m_vOffset);
+	if (m_bHumanControlChange != HumanControlled())
+	{
+		m_bHumanControlChange = HumanControlled();
+		if (HumanControlled())
+		{
+			double radius = 70.0f;
+			double calculatedAngle = (TwoPi/ m_iNbreAgent)* m_id;
+			double xOffset = radius * cos(calculatedAngle);
+			double yOffset = radius * sin(calculatedAngle);
+			Steering()->OffsetPursuitOn(m_vLeader, Vector2D(xOffset, yOffset));
+		}
+		else
+		{
+			Steering()->OffsetPursuitOn(m_vTarget, m_vOffset);
+		}
+	}
 	Vehicle::Update(time_elapsed);
 }
+

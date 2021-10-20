@@ -47,8 +47,7 @@ GameWorld::GameWorld(int cx, int cy):
   double border = 30;
   m_pPath = new Path(5, border, border, cx-border, cy-border, true); 
 
- //setup the agents
-  //setup the agents leader
+  //setup the leader agent
   Vector2D SpawnPos = Vector2D(cx / 2.0 + RandomClamped() * cx / 2.0,
       cy / 2.0 + RandomClamped() * cy / 2.0);
 
@@ -66,8 +65,7 @@ GameWorld::GameWorld(int cx, int cy):
  m_pCellSpace->AddEntity(pLeader);
 
 
- //setup the agents poursuiveurs
-
+  //Setup the followers agents
   for (int a=0; a<Prm.NumAgents; ++a)
   {
 
@@ -99,22 +97,6 @@ GameWorld::GameWorld(int cx, int cy):
     //add it to the cell subdivision
     m_pCellSpace->AddEntity(pVehicle);
   }
-
-/* 
-#define SHOAL
-#ifdef SHOAL
-  m_Vehicles[Prm.NumAgents-1]->Steering()->FlockingOff();
-  m_Vehicles[Prm.NumAgents-1]->SetScale(Vector2D(10, 10));
-  m_Vehicles[Prm.NumAgents-1]->Steering()->WanderOn();
-  m_Vehicles[Prm.NumAgents-1]->SetMaxSpeed(70);
-
-
-   for (int i=0; i<Prm.NumAgents-1; ++i)
-  {
-    m_Vehicles[i]->Steering()->EvadeOn(m_Vehicles[Prm.NumAgents-1]);
-
-  }
-#endif*/
  
   //create any obstacles or walls
   //CreateObstacles();
@@ -126,12 +108,12 @@ GameWorld::GameWorld(int cx, int cy):
 //------------------------------------------------------------------------
 GameWorld::~GameWorld()
 {
-  for (unsigned int a=0; a<m_Vehicles.size(); ++a)
+  for (int a=0; a<m_Vehicles.size(); ++a)
   {
     delete m_Vehicles[a];
   }
 
-  for (unsigned int ob=0; ob<m_Obstacles.size(); ++ob)
+  for (int ob=0; ob<m_Obstacles.size(); ++ob)
   {
     delete m_Obstacles[ob];
   }
@@ -156,7 +138,7 @@ void GameWorld::Update(double time_elapsed)
   
 
   //update the vehicles
-  for (unsigned int a=0; a<m_Vehicles.size(); ++a)
+  for (unsigned int a=0; a < m_Vehicles.size(); a++)
   {
     m_Vehicles[a]->Update(time_elapsed);
   }
@@ -336,7 +318,7 @@ void GameWorld::HandleKeyPresses(WPARAM wParam)
 
     case 'C':
     {
-        for (int i = 0; i < Prm.NumAgents; ++i)
+        for (int i = 0; i < Prm.NumAgents + 1; ++i)
         {
             m_Vehicles[i]->SetHumanControl();
         }
