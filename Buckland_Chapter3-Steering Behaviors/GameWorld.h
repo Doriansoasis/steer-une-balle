@@ -49,7 +49,7 @@ private:
   //any path we may create for the vehicles to follow
   Path*                         m_pPath;
 
-  //set true to pause the motion
+  //set true to pause the motionc
   bool                          m_bPaused;
 
   //local copy of client window dimensions

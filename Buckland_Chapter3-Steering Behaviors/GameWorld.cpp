@@ -47,7 +47,6 @@ GameWorld::GameWorld(int cx, int cy):
   double border = 30;
   m_pPath = new Path(5, border, border, cx-border, cy-border, true); 
 
-
   //setup the leader agent
   Vector2D SpawnPos = Vector2D(cx / 2.0 + RandomClamped() * cx / 2.0,
       cy / 2.0 + RandomClamped() * cy / 2.0);
@@ -62,8 +61,9 @@ GameWorld::GameWorld(int cx, int cy):
                          Prm.MaxTurnRatePerSecond, //max turn rate
                          Prm.VehicleScale);        //scale)
 
-  m_Vehicles.push_back(pLeader);
-  m_pCellSpace->AddEntity(pLeader);
+ m_Vehicles.push_back(pLeader);
+ m_pCellSpace->AddEntity(pLeader);
+
 
   //Setup the followers agents
   for (int a=0; a<Prm.NumAgents; ++a)
@@ -85,7 +85,7 @@ GameWorld::GameWorld(int cx, int cy):
         Prm.VehicleScale,        //scale
         m_Vehicles[0],
         m_Vehicles.back(),
-        Vector2D(0.05f, 0.05f),
+        Vector2D(-20.0f, 0.05f),
         a,
         Prm.NumAgents); //Initialisation
 
@@ -97,22 +97,6 @@ GameWorld::GameWorld(int cx, int cy):
     //add it to the cell subdivision
     m_pCellSpace->AddEntity(pVehicle);
   }
-
-/* 
-#define SHOAL
-#ifdef SHOAL
-  m_Vehicles[Prm.NumAgents-1]->Steering()->FlockingOff();
-  m_Vehicles[Prm.NumAgents-1]->SetScale(Vector2D(10, 10));
-  m_Vehicles[Prm.NumAgents-1]->Steering()->WanderOn();
-  m_Vehicles[Prm.NumAgents-1]->SetMaxSpeed(70);
-
-
-   for (int i=0; i<Prm.NumAgents-1; ++i)
-  {
-    m_Vehicles[i]->Steering()->EvadeOn(m_Vehicles[Prm.NumAgents-1]);
-
-  }
-#endif*/
  
   //create any obstacles or walls
   //CreateObstacles();

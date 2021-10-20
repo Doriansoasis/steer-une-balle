@@ -26,7 +26,6 @@ AgentPoursuiveur::AgentPoursuiveur(GameWorld* world,
 	m_vOffset = offset;
 	m_iNbreAgent = count;
 	m_id = id;
-
 }
 
 void AgentPoursuiveur::Update(double time_elapsed)
