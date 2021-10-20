@@ -17,35 +17,29 @@ AgentPoursuiveur::AgentPoursuiveur(GameWorld* world,
 	int id,
 	int count): Vehicle(world, position, rotation, velocity, mass, max_force, max_speed, max_turn_rate, scale) 
 {
-	m_pSteering->OffsetPursuitOn(leader, offset);//Must also use flocking to get distance between poursuiveur
-	m_pSteering->WallAvoidanceOn();
-	SetScale(Vector2D(10, 10));
+	m_vLeader = leader;
+	m_vTarget = target;
+	m_vOffset = offset;
+	m_iNbreAgent = count;
+	m_id = id; 
+	
+	Steering()->OffsetPursuitOn(m_vTarget, m_vOffset);//Must also use flocking to get distance between poursuiveur and change algorithm
+	Steering()->WallAvoidanceOn();
+	//SetScale(Vector2D(5, 5));
 }
 
 // --------------------------------dtor-----------------------------------
 //------------------------------------------------------------------------
 AgentPoursuiveur::~AgentPoursuiveur()
 {
-	delete m_pSteering;//Must fint what needs to be deleted
-	delete m_pHeadingSmoother;
+	//delete m_pSteering;//Must find what needs to be deleted
+	//delete m_pHeadingSmoother;
 }
 
 //----------------------------- Update -----------------------------------
 //------------------------------------------------------------------------
 void AgentPoursuiveur::Update(double time_elapsed)
 {
-	/*if (m_bPaused) return;
-
-	//create a smoother to smooth the framerate
-	const int SampleRate = 10;
-	static Smoother<double> FrameRateSmoother(SampleRate, 0.0);
-
-	m_dAvFrameTime = FrameRateSmoother.Update(time_elapsed);
-
-
-	//update the vehicles
-	for (unsigned int a = 0; a < m_Vehicles.size(); ++a)
-	{
-		m_Vehicles[a]->Update(time_elapsed);
-	}*/
+	//m_pSteering->OffsetPursuitOn(m_vTarget, m_vOffset);
+	Vehicle::Update(time_elapsed);
 }

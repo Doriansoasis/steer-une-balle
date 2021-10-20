@@ -2,9 +2,9 @@
 #ifndef AGENT_POURSUIVEUR_H
 #define AGENT_POURSUIVEUR_H
 
+#include "Leader.h"
 #include "SteeringBehaviors.h"
 #include "Vehicle.h"
-#include "2D/Vector2D.h"
 #include <vector>
 #include <list>
 #include <string>
@@ -20,6 +20,7 @@ protected:
 	Vehicle* m_vLeader;
 	Vehicle* m_vTarget;
 	int m_iNbreAgent;
+	int m_id;
 public:
 	AgentPoursuiveur(GameWorld* world,
 		Vector2D position,
