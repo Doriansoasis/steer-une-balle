@@ -87,7 +87,7 @@ GameWorld::GameWorld(int cx, int cy):
         Prm.VehicleScale,        //scale
         m_Vehicles[0],
         m_Vehicles.back(),
-        Vector2D(0.05f, 0.05f),
+        Vector2D(-20.0f, 0.05f),
         a,
         Prm.NumAgents); //Initialisation
 
