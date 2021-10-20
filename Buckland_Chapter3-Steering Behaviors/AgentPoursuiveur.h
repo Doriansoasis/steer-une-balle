@@ -36,7 +36,6 @@ public:
 		Vector2D offset,
 		int id,
 		int count);
-	//~AgentPoursuiveur();
 	//updates the vehicle's position and orientation
 	void Update(double time_elapsed);
 };
