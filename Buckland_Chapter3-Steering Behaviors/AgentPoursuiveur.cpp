@@ -17,36 +17,39 @@ AgentPoursuiveur::AgentPoursuiveur(GameWorld* world,
 	int id,
 	int count): Vehicle(world, position, rotation, velocity, mass, max_force, max_speed, max_turn_rate, scale) 
 {
-	m_pSteering->offset_pursuitOn();//Must also use flocking to get distance between poursuiveur
-	m_pSteering->WallAvoidanceOn();
-	SetScale(Vector2D(10, 10));
+	Steering()->OffsetPursuitOn(target, offset);//Must also use flocking to get distance between poursuiveur
+	Steering()->WallAvoidanceOn();
+	Steering()->ObstacleAvoidanceOn();
+	SetScale(Vector2D(2*scale, 2*scale));
+	m_vLeader = leader;
+	m_vTarget = target;
+	m_vOffset = offset;
+	m_iNbreAgent = count;
+	m_id = id;
 }
 
-// --------------------------------dtor-----------------------------------
-//------------------------------------------------------------------------
-AgentPoursuiveur::~AgentPoursuiveur()
-{
-	delete m_pSteering;//Must fint what needs to be deleted
-	delete m_pHeadingSmoother;
-}
-
-//----------------------------- Update -----------------------------------
-//------------------------------------------------------------------------
 void AgentPoursuiveur::Update(double time_elapsed)
 {
-	/*if (m_bPaused) return;
-
-	//create a smoother to smooth the framerate
-	const int SampleRate = 10;
-	static Smoother<double> FrameRateSmoother(SampleRate, 0.0);
-
-	m_dAvFrameTime = FrameRateSmoother.Update(time_elapsed);
-
-
-	//update the vehicles
-	for (unsigned int a = 0; a < m_Vehicles.size(); ++a)
+	if (m_bHumanControlChange != HumanControlled())
 	{
-		m_Vehicles[a]->Update(time_elapsed);
-	}*/
+		m_bHumanControlChange = HumanControlled();
+		if (HumanControlled())
+		{
+			double radius = 50.0f;
+			double calculatedAngle = (TwoPi/ m_iNbreAgent)* m_id;
+			double xOffset = radius * cos(calculatedAngle);
+			double yOffset = radius * sin(calculatedAngle);
+			SetScale(Vector2D(1+m_id, 1+m_id));
+			Steering()->OffsetPursuitOn(m_vLeader, Vector2D(xOffset, yOffset));
+			
+		}
+
+		else
+		{
+
+			Steering()->OffsetPursuitOn(m_vTarget, m_vOffset);
+		}
+	}
 	Vehicle::Update(time_elapsed);
 }
+
